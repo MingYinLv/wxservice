@@ -47,6 +47,12 @@ function generator(app) {
         res.redirect('/followList.html');
       });
     },
+    defaultRequest() {
+      app.get('*', (req, res) => {
+        console.log(req.originalUrl);
+        res.end('自动回复');
+      });
+    }
   };
 }
 
