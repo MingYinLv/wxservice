@@ -6,6 +6,7 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import mongoStore from 'connect-mongo';
+import xmlparser from 'express-xml-bodyparser';
 import path from 'path';
 import routes from './routes';
 import config from './utils/config';
@@ -17,7 +18,7 @@ const MongoSession = mongoStore(session);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.text({ type: 'text/xml' }));
+app.use(xmlparser());
 
 routes(app);
 
