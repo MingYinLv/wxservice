@@ -49,11 +49,11 @@ function generator(app) {
     defaultRequest() {
       app.get('*', (req, res) => {
         console.log(req.originalUrl, req.body);
-        res.end('自动回复');
+        res.end('');
       });
       app.post('*', (req, res) => {
         console.log(req.originalUrl, req.body);
-        res.end('自动回复');
+        res.end('');
       });
     },
   };
