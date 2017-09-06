@@ -5,6 +5,8 @@
 import crypto from 'crypto';
 import config from '../utils/config';
 import { getAccessToken, createMenu } from '../utils/request';
+import { login, save } from '../service/UserService';
+import checkLogin from '../middleware/checkLogin';
 
 let isInit = false;
 let routes = null;
@@ -19,7 +21,7 @@ function initWx() {
 function generator(app) {
   return {
     checkWx() {
-      app.get('/checkWx', (req, res) => {
+      app.get('/', (req, res) => {
         const { signature, timestamp, nonce, echostr } = req.query;
         const str = [config.wxToken, timestamp, nonce].sort().join('');
         const hash = crypto.createHash('sha1');
@@ -28,9 +30,20 @@ function generator(app) {
         res.end(hex === signature ? echostr : '不是微信');
       });
     },
+    login() {
+      app.post('/login', (req, res) => {
+        const { name, openid, returnUrl } = req.body;
+        save({
+          name, openid,
+        }).then(({ result }) => {
+          req.session.user = result;
+          res.redirect(returnUrl);
+        });
+      });
+    },
     followList() {
-      app.get('/followList', (req, res) => {
-
+      app.get('/followList', checkLogin, (req, res) => {
+        res.redirect('/followList.html');
       });
     },
   };
