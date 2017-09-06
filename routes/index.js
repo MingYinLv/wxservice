@@ -20,7 +20,7 @@ function initWx() {
 
 function generator(app) {
   return {
-    checkWx() {
+    init() {
       app.get('/', (req, res) => {
         const { signature, timestamp, nonce, echostr } = req.query;
         const str = [config.wxToken, timestamp, nonce].sort().join('');
@@ -28,6 +28,25 @@ function generator(app) {
         hash.update(str);
         const hex = hash.digest('hex');
         res.end(hex === signature ? echostr : '不是微信');
+      });
+      app.post('/', (req, res) => {
+        const { signature, timestamp, nonce } = req.query;
+        const str = [config.wxToken, timestamp, nonce].sort().join('');
+        const hash = crypto.createHash('sha1');
+        hash.update(str);
+        const hex = hash.digest('hex');
+        if (hex === signature) {
+          res.end(`<xml>
+            <ToUserName><![CDATA[ovHJZ0VpazB47iXZossvjYLnBeVk]]></ToUserName>
+            <FromUserName><![CDATA[gh_aea95a658979]]></FromUserName>
+            <CreateTime>${Date.now()}</CreateTime>
+            <MsgType><![CDATA[text]]></MsgType>
+            <Content><![CDATA[自动回复]]></Content>
+            </xml>
+          `);
+        } else {
+          res.end('');
+        }
       });
     },
     login() {
