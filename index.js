@@ -24,6 +24,6 @@ app.get('/checkWx', (req, res) => {
   res.end(hex === signature ? echostr : '不是微信');
 });
 
-app.listen(8080, () => {
-  console.log(`wxservice listening on port 8080`);
+app.listen(80, () => {
+  console.log(`wxservice listening on port 80`);
 });
