@@ -48,11 +48,11 @@ function generator(app) {
     },
     defaultRequest() {
       app.get('*', (req, res) => {
-        console.log(req.body);
+        console.log(req.originalUrl, req.body);
         res.end('自动回复');
       });
       app.post('*', (req, res) => {
-        console.log(req.body);
+        console.log(req.originalUrl, req.body);
         res.end('自动回复');
       });
     },
