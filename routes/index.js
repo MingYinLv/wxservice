@@ -55,6 +55,13 @@ function generator(app) {
         });
         res.end('自动回复');
       });
+      app.post('*', (req, res) => {
+        console.log(req.originalUrl);
+        res.header({
+          'Content-Type': 'text/html; charset=UTF-8',
+        });
+        res.end('自动回复');
+      });
     },
   };
 }
