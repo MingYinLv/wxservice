@@ -22,7 +22,6 @@ function generator(app) {
   return {
     checkWx() {
       app.get('/', (req, res) => {
-        console.log(req.body);
         const { signature, timestamp, nonce, echostr } = req.query;
         const str = [config.wxToken, timestamp, nonce].sort().join('');
         const hash = crypto.createHash('sha1');
@@ -49,17 +48,11 @@ function generator(app) {
     },
     defaultRequest() {
       app.get('*', (req, res) => {
-        console.log(req.originalUrl);
-        res.header({
-          'Content-Type': 'text/html; charset=UTF-8',
-        });
+        console.log(req.body);
         res.end('自动回复');
       });
       app.post('*', (req, res) => {
-        console.log(req.originalUrl);
-        res.header({
-          'Content-Type': 'text/html; charset=UTF-8',
-        });
+        console.log(req.body);
         res.end('自动回复');
       });
     },
