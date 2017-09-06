@@ -22,6 +22,7 @@ function generator(app) {
   return {
     checkWx() {
       app.get('/', (req, res) => {
+        console.log(req.body);
         const { signature, timestamp, nonce, echostr } = req.query;
         const str = [config.wxToken, timestamp, nonce].sort().join('');
         const hash = crypto.createHash('sha1');
@@ -32,9 +33,9 @@ function generator(app) {
     },
     login() {
       app.post('/login', (req, res) => {
-        const { name, openid, returnUrl } = req.body;
-        save({
-          name, openid,
+        const { openid, returnUrl } = req.body;
+        login({
+          openid,
         }).then(({ result }) => {
           req.session.user = result;
           res.redirect(returnUrl);
