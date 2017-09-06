@@ -2,28 +2,19 @@
  * Created by MingYin Lv on 2017/9/6 上午11:38.
  */
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const crypto = require('crypto');
-const path = require('path');
+import express from 'express';
+import bodyParser from 'body-parser';
+import path from 'path';
+import routes from './routes';
+import config from './utils/config';
 
 const app = express();
-const token = 'zhinanmao';
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+routes(app);
 
-app.get('/checkWx', (req, res) => {
-  const { signature, timestamp, nonce, echostr } = req.query;
-  const str = [token, timestamp, nonce].sort().join('');
-  const hash = crypto.createHash('sha1');
-  hash.update(str);
-  const hex = hash.digest('hex');
-  console.log(hex);
-  res.end(hex === signature ? echostr : '不是微信');
-});
-
-app.listen(80, () => {
-  console.log(`wxservice listening on port 80`);
+app.listen(config.port, () => {
+  console.log(`wxservice listening on port ${config.port}`);
 });
