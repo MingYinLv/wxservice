@@ -25,6 +25,7 @@ export const EventType = {
 
 const eventHandler = {
   [EventType.SUBSCRIBE]: ({ body }, req, res) => {
+    console.log('订阅推送');
     sendTemplate({
       touser: body.fromusername,
       template_id: 'uGBs1aTCRFwJwWUx3TN_sZWtxM3Ga3xLPmvLS40wcOA',
@@ -47,7 +48,7 @@ export default function (req, res) {
     }
   } else {
     res.end(`<xml>
-            <ToUserName><![CDATA[ovHJZ0VpazB47iXZossvjYLnBeVk]]></ToUserName>
+            <ToUserName><![CDATA[${body.fromusername}]]></ToUserName>
             <FromUserName><![CDATA[gh_aea95a658979]]></FromUserName>
             <CreateTime>${Date.now()}</CreateTime>
             <MsgType><![CDATA[text]]></MsgType>
