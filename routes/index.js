@@ -4,7 +4,8 @@
 
 import crypto from 'crypto';
 import url from 'url';
-import qs from 'qs';
+import qs from 'querystring';
+import pug from 'pug';
 import config from '../utils/config';
 import { getAccessToken, createMenu, getWebAccessToken } from '../utils/request';
 import { login, save } from '../service/UserService';
@@ -51,7 +52,8 @@ function generator(app) {
         const urlObj = url.parse(returnUrl);
         const code = qs.parse(urlObj.query).code;
         getWebAccessToken(code).then(({ openid }) => {
-          res.render('./views/login', { openid, returnUrl });
+          console.log(openid);
+          res.end(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
         });
       });
       app.post('/login', (req, res) => {
