@@ -6,6 +6,7 @@
 export default (req, res, next) => {
   if (!req.session.user) {
     res.set('Content-Type', 'application/json; charset=utf-8');
+    console.log(req.originalUrl);
     res.redirect(`/login/${encodeURIComponent(req.originalUrl)}`);
     return;
   }
