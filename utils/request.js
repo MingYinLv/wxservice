@@ -11,9 +11,7 @@ const defaultMenu = {
   button: [{
     type: 'view',
     name: '定制行程',
-    url: encodeURIComponent(`https://open.weixin.qq.com/connect/oauth2/authorize?
-    appid=${config.appid}&redirect_uri=http://www.lvmingyin.com/followList
-    &response_type=code&scope=snsapi_base#wechat_redirect`),
+    url: `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent('http://www.lvmingyin.com/followList')}&response_type=code&scope=snsapi_base#wechat_redirect`,
   }, {
     type: 'click',
     name: '个人中心',
@@ -60,11 +58,9 @@ export function createMenu(menu = defaultMenu) {
   return fetch('/cgi-bin/menu/create', {
     method: 'POST',
     body: menu,
-  }).then(({ errcode, errmsg }) => {
+  }).then(({ errcode }) => {
     if (errcode === 0) {
       console.info('微信菜单创建成功');
-    } else {
-      console.log(errcode, errmsg);
     }
   });
 }

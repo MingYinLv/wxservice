@@ -26,8 +26,6 @@
     "camelcase": 0,
     // 此规则旨在消除这对程序的状态没有影响未使用的表达式
     "no-unused-expressions": 0,
-    // 最大长度字符
-    "max-len": [2, 120],
     // 修改参数变量可能会产生误导，导致混乱的行为
     "no-param-reassign": [2, { "props": false }],
     // 允许方法提前调用
