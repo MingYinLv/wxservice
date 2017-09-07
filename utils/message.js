@@ -29,7 +29,6 @@ const eventHandler = {
     sendTemplate({
       touser: body.fromusername,
       template_id: 'uGBs1aTCRFwJwWUx3TN_sZWtxM3Ga3xLPmvLS40wcOA',
-      url: 'http://www.lvmingyin.com/welcome',
       data: {},
     });
     res.end('');

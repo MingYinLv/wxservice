@@ -11,12 +11,19 @@ const defaultMenu = {
   button: [{
     type: 'view',
     name: '定制行程',
-    url: 'http://www.lvmingyin.com/followList',
+    url: `https://open.weixin.qq.com/connect/oauth2/authorize?
+    appid=wx520c15f417810387&redirect_uri=${encodeURIComponent('http://www.lvmingyin.com/followList')}
+    &response_type=code&scope=snsapi_base&state=123#wechat_redirect`,
   }, {
     type: 'click',
     name: '个人中心',
     key: 'personCenter',
     sub_button: [
+      {
+        type: 'view',
+        name: '我的二维码',
+        url: 'http://www.lvmingyin.com/myQrCode',
+      },
       {
         type: 'view',
         name: '我的订单',
