@@ -47,6 +47,7 @@ function generator(app) {
       app.get('/login/:returnUrl', (req, res) => {
         const { returnUrl } = req.params;
         const { code } = req.query;
+        console.log(returnUrl, code);
         getWebAccessToken(code).then(({ openid }) => {
           res.render('./views/login', { openid, returnUrl });
         });
