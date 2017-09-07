@@ -52,7 +52,6 @@ function generator(app) {
         const urlObj = url.parse(returnUrl);
         const code = qs.parse(urlObj.query).code;
         getWebAccessToken(code).then(({ openid }) => {
-          console.log(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
           res.end(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
         });
       });
