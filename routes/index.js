@@ -53,7 +53,7 @@ function generator(app) {
         const code = qs.parse(urlObj.query).code;
         getWebAccessToken(code).then(({ openid, errcode }) => {
           if (errcode === 40029) {
-            res.redirect(`/toWxAuth?returnUrl=${encodeURIComponent(returnUrl}`);
+            res.redirect(`/toWxAuth?returnUrl=${encodeURIComponent(returnUrl)}`);
           } else {
             res.end(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
           }
