@@ -40,7 +40,7 @@ export default function (req, res) {
   const body = convertXmlJson(req.body);
   console.log(body);
   if (body.msgtype === MessageType.EVENT) {
-    if (eventHandler[body.event] === 'function') {
+    if (typeof eventHandler[body.event] === 'function') {
       eventHandler[body.event]({ body }, req, res);
     } else {
       // 默认不处理
