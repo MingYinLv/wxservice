@@ -60,9 +60,11 @@ export function createMenu(menu = defaultMenu) {
   return fetch('/cgi-bin/menu/create', {
     method: 'POST',
     body: menu,
-  }).then(({ errcode }) => {
+  }).then(({ errcode, errmsg }) => {
     if (errcode === 0) {
       console.info('微信菜单创建成功');
+    } else {
+      console.log(errcode, errmsg);
     }
   });
 }
