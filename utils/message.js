@@ -37,7 +37,8 @@ const eventHandler = {
 
 export default function (req, res) {
   const body = convertXmlJson(req.body);
-  if (body.msgtype === MessageType.event) {
+  console.log(body);
+  if (body.msgtype === MessageType.EVENT) {
     if (eventHandler[body.event] === 'function') {
       eventHandler[body.event]({ body }, req, res);
     } else {
