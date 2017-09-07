@@ -57,7 +57,7 @@ function generator(app) {
     toWxAuth() {
       app.get('/toWxAuth', (req, res) => {
         const { returnUrl } = req.query;
-        res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent('http://m.zhinanmao.com')}&response_type=code&scope=snsapi_base#wechat_redirect`);
+        res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent(returnUrl)}&response_type=code&scope=snsapi_base#wechat_redirect`);
       });
     },
     followList() {
