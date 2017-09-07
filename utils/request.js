@@ -11,7 +11,7 @@ const defaultMenu = {
   button: [{
     type: 'view',
     name: '定制行程',
-    url: `${config.web}/toWxAuth?returnUrl=${encodeURIComponent(`${config.web}/followList`)}`,
+    url: `${config.web}/toWxAuth?returnUrl=${encodeURIComponent(`http://m.saastrip.com/followList`)}`,
   }, {
     type: 'click',
     name: '个人中心',
