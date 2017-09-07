@@ -61,7 +61,7 @@ export function createMenu(menu = defaultMenu) {
 }
 
 export function sendTemplate(body) {
-  return fetch('/message/template/send', {
+  return fetch('/cgi-bin/message/template/send', {
     method: 'POST',
     body,
   });
