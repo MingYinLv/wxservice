@@ -51,8 +51,12 @@ function generator(app) {
         const { returnUrl } = req.params;
         const urlObj = url.parse(returnUrl);
         const code = qs.parse(urlObj.query).code;
-        getWebAccessToken(code).then(({ openid }) => {
-          res.end(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
+        getWebAccessToken(code).then(({ openid, errcode }) => {
+          if (errcode === 40029) {
+            res.redirect(`/toWxAuth?returnUrl=${encodeURIComponent(returnUrl}`);
+          } else {
+            res.end(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
+          }
         });
       });
       app.post('/login', (req, res) => {
