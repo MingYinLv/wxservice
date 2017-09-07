@@ -54,7 +54,7 @@ function generator(app) {
         getWebAccessToken(code).then(({ openid, errcode }) => {
           console.log(openid, errcode);
           if (errcode === 40029 || errcode === 40163) {
-            res.redirect(`/toWxAuth?returnUrl=${encodeURIComponent(returnUrl)}`);
+            res.redirect(`/toWxAuth.html?returnUrl=${config.web}${encodeURIComponent(returnUrl)}`);
           } else {
             res.end(pug.compileFile('./views/login.pug')({ openid, returnUrl }));
           }
@@ -70,12 +70,12 @@ function generator(app) {
         });
       });
     },
-    toWxAuth() {
-      app.get('/toWxAuth', (req, res) => {
-        const { returnUrl } = req.query;
-        res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent(returnUrl)}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect `);
-      });
-    },
+    // toWxAuth() {
+    //   app.get('/toWxAuth', (req, res) => {
+    //     const { returnUrl } = req.query;
+    //     res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent(returnUrl)}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`);
+    //   });
+    // },
     followList() {
       app.get('/followList', checkLogin, (req, res) => {
         res.redirect('/followList.html');
