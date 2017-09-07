@@ -14,7 +14,7 @@ export default (url, options) => {
   Object.assign(opts, options);
   opts.body = opts.body ? JSON.stringify(opts.body) : undefined;
 
-  let suffix = `appid=${config.appid}&secret=${config.secret}&access_token=${getTokenByStr()}`;
+  let suffix = `access_token=${getTokenByStr()}`;
   if (url.includes('?')) {
     suffix = `&${suffix}`;
   } else {

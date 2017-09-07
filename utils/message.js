@@ -2,6 +2,8 @@
  * Created by MingYin Lv on 2017/9/7 上午9:59.
  */
 
+import { sendTemplate } from './request';
+
 function convertXmlJson(body) {
   const xml = body.xml;
   const result = {};
@@ -23,16 +25,25 @@ export const EventType = {
 
 const eventHandler = {
   [EventType.SUBSCRIBE]: ({ body }, req, res) => {
-
+    sendTemplate({
+      touser: body.fromusername,
+      template_id: 'uGBs1aTCRFwJwWUx3TN_sZWtxM3Ga3xLPmvLS40wcOA',
+      url: 'http://www.lvmingyin.com/welcome',
+      data: {},
+    });
+    res.end('');
   },
 };
 
 export default function (req, res) {
-  const body = req.body;
-  console.log(body);
-  // const body = convertXmlJson(req.body);
+  const body = convertXmlJson(req.body);
   if (body.msgtype === MessageType.event) {
-    typeof eventHandler[body.event] === 'function' && eventHandler[body.event]({ body }, req, res);
+    if (eventHandler[body.event] === 'function') {
+      eventHandler[body.event]({ body }, req, res);
+    } else {
+      // 默认不处理
+      res.end('');
+    }
   } else {
     res.end(`<xml>
             <ToUserName><![CDATA[ovHJZ0VpazB47iXZossvjYLnBeVk]]></ToUserName>

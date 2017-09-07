@@ -7,7 +7,7 @@ import config from '../utils/config';
 import { getAccessToken, createMenu } from '../utils/request';
 import { login, save } from '../service/UserService';
 import checkLogin from '../middleware/checkLogin';
-import message from './message';
+import message from '../utils/message';
 
 let isInit = false;
 let routes = null;

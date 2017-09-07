@@ -3,6 +3,7 @@
  */
 
 import fetch from './fetch';
+import config from './config';
 
 let tokenFetch = null;
 let accessToken = '';
@@ -34,11 +35,11 @@ export function getTokenByStr() {
 }
 
 function initAccessToken() {
-  return fetch('/cgi-bin/token?grant_type=client_credential')
+  return fetch(`/cgi-bin/token?grant_type=client_credential&appid=${config.appid}&secret=${config.secret}`)
     .then(({ access_token, expires_in }) => {
       setTimeout(initAccessToken, expires_in * 1000);
       accessToken = access_token;
-      console.log('access_token:', access_token)
+      console.log('access_token:', access_token);
       return Promise.resolve(access_token);
     });
 }
@@ -56,5 +57,12 @@ export function createMenu(menu = defaultMenu) {
     if (errcode === 0) {
       console.info('微信菜单创建成功');
     }
+  });
+}
+
+export function sendTemplate(body) {
+  return fetch('message/template/send', {
+    method: 'POST',
+    body,
   });
 }
