@@ -38,6 +38,7 @@ function initAccessToken() {
     .then(({ access_token, expires_in }) => {
       setTimeout(initAccessToken, expires_in * 1000);
       accessToken = access_token;
+      console.log('access_token:', access_token)
       return Promise.resolve(access_token);
     });
 }

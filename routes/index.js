@@ -7,6 +7,7 @@ import config from '../utils/config';
 import { getAccessToken, createMenu } from '../utils/request';
 import { login, save } from '../service/UserService';
 import checkLogin from '../middleware/checkLogin';
+import message from './message';
 
 let isInit = false;
 let routes = null;
@@ -36,14 +37,7 @@ function generator(app) {
         hash.update(str);
         const hex = hash.digest('hex');
         if (hex === signature) {
-          res.end(`<xml>
-            <ToUserName><![CDATA[ovHJZ0VpazB47iXZossvjYLnBeVk]]></ToUserName>
-            <FromUserName><![CDATA[gh_aea95a658979]]></FromUserName>
-            <CreateTime>${Date.now()}</CreateTime>
-            <MsgType><![CDATA[text]]></MsgType>
-            <Content><![CDATA[自动回复]]></Content>
-            </xml>
-          `);
+          message(req, res);
         } else {
           res.end('');
         }
