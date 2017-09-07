@@ -12,8 +12,8 @@ const defaultMenu = {
     type: 'view',
     name: '定制行程',
     url: `https://open.weixin.qq.com/connect/oauth2/authorize?
-    appid=wx520c15f417810387&redirect_uri=${encodeURIComponent('http://www.lvmingyin.com/followList')}
-    &response_type=code&scope=snsapi_base&state=123#wechat_redirect`,
+    appid=${config.appid}&redirect_uri=${encodeURIComponent('http://www.lvmingyin.com/followList')}
+    &response_type=code&scope=snsapi_base#wechat_redirect`,
   }, {
     type: 'click',
     name: '个人中心',
