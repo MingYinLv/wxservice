@@ -57,8 +57,7 @@ function generator(app) {
     toWxAuth() {
       app.get('/toWxAuth', (req, res) => {
         const { returnUrl } = req.query;
-        res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent(returnUrl)}&response_type=
-code&scope=snsapi_userinfo&state=STATE#wechat_redirect `);
+        res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent(returnUrl)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect `);
       });
     },
     followList() {
