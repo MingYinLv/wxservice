@@ -11,7 +11,7 @@ const defaultMenu = {
   button: [{
     type: 'view',
     name: '定制行程',
-    url: `${config.web}/toWxAuth?returnUrl=${encodeURIComponent('http://m.zhinanmao.com/followList')}`,
+    url: `http://m.zhinanmao.com/toWxAuth?returnUrl=${encodeURIComponent(`${config.web}/followList`)}`,
   }, {
     type: 'click',
     name: '个人中心',
