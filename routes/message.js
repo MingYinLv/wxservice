@@ -4,6 +4,7 @@
 
 
 export default function (req, res) {
+  console.log(req.body);
   res.end(`<xml>
             <ToUserName><![CDATA[ovHJZ0VpazB47iXZossvjYLnBeVk]]></ToUserName>
             <FromUserName><![CDATA[gh_aea95a658979]]></FromUserName>
