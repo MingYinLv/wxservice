@@ -4,6 +4,7 @@
 
 export default {
   port: 80,
+  web: 'http://www.lvmingyin.com',
   wxUrl: 'https://api.weixin.qq.com',
   wxToken: 'zhinanmao',
   appid: 'wx1a0f08a0de75c35a',

@@ -11,7 +11,7 @@ const defaultMenu = {
   button: [{
     type: 'view',
     name: '定制行程',
-    url: `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent('http://www.lvmingyin.com/followList')}&response_type=code&scope=snsapi_base#wechat_redirect`,
+    url: `${config.web}/toWxAuth?returnUrl=${encodeURIComponent(`${config.web}/followList`)}`,
   }, {
     type: 'click',
     name: '个人中心',
@@ -20,16 +20,16 @@ const defaultMenu = {
       {
         type: 'view',
         name: '我的二维码',
-        url: 'http://www.lvmingyin.com/myQrCode',
+        url: `${config.web}/myQrCode`,
       },
       {
         type: 'view',
         name: '我的订单',
-        url: 'http://www.lvmingyin.com/myOrderList',
+        url: `${config.web}/myOrderList`,
       }, {
         type: 'view',
         name: '我的路线',
-        url: 'http://www.lvmingyin.com/myRouteList',
+        url: `${config.web}/myRouteList`,
       }],
   }],
 };
