@@ -71,3 +71,7 @@ export function sendTemplate(body) {
     body,
   });
 }
+
+export function getWebAccessToken(code) {
+  return fetch(`https://api.weixin.qq.com/sns/oauth2/access_token?appid=${config.appid}&secret=${config.secret}&code=${code}&grant_type=authorization_code`);
+}

@@ -4,7 +4,7 @@
 
 import crypto from 'crypto';
 import config from '../utils/config';
-import { getAccessToken, createMenu } from '../utils/request';
+import { getAccessToken, createMenu, getWebAccessToken } from '../utils/request';
 import { login, save } from '../service/UserService';
 import checkLogin from '../middleware/checkLogin';
 import message from '../utils/message';
@@ -44,6 +44,13 @@ function generator(app) {
       });
     },
     login() {
+      app.get('/login/:returnUrl', (req, res) => {
+        const { returnUrl } = req.params;
+        const { code } = req.query;
+        getWebAccessToken(code).then(({ openid }) => {
+          res.render('./views/login', { openid, returnUrl });
+        });
+      });
       app.post('/login', (req, res) => {
         const { openid, returnUrl } = req.body;
         login({
