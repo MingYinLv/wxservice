@@ -3,6 +3,8 @@
  */
 
 import crypto from 'crypto';
+import url from 'url';
+import qs from 'qs';
 import config from '../utils/config';
 import { getAccessToken, createMenu, getWebAccessToken } from '../utils/request';
 import { login, save } from '../service/UserService';
@@ -46,8 +48,8 @@ function generator(app) {
     login() {
       app.get('/login/:returnUrl', (req, res) => {
         const { returnUrl } = req.params;
-        const { code } = req.query;
-        console.log(returnUrl, code);
+        const urlObj = url.parse(returnUrl);
+        const code = qs.parse(urlObj.query).code;
         getWebAccessToken(code).then(({ openid }) => {
           res.render('./views/login', { openid, returnUrl });
         });
