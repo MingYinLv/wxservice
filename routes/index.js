@@ -49,7 +49,9 @@ function generator(app) {
     login() {
       app.get('/login/:returnUrl', (req, res) => {
         const { returnUrl } = req.params;
-        res.end(pug.compileFile('./views/login.pug')({ returnUrl }));
+        const urlObj = url.parse(returnUrl);
+        const code = qs.parse(urlObj.query).code;
+        res.end(pug.compileFile('./views/login.pug')({ returnUrl, code }));
       });
       app.post('/login', (req, res) => {
         const { openid, returnUrl } = req.body;
@@ -69,12 +71,6 @@ function generator(app) {
             openid: data.openid,
           });
         });
-      });
-    },
-    toWxAuth() {
-      app.get('/toWxAuth', (req, res) => {
-        const { returnUrl } = req.query;
-        res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.appid}&redirect_uri=${encodeURIComponent(returnUrl)}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`);
       });
     },
     followList() {
