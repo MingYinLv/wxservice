@@ -21,6 +21,7 @@ export const MessageType = {
 export const EventType = {
   SUBSCRIBE: 'subscribe',     // 订阅事件
   UNSUBSCRIBE: 'unsubscribe', // 取消订阅事件
+  SCAN: 'SCAN',
 };
 
 const eventHandler = {
@@ -31,6 +32,11 @@ const eventHandler = {
       template_id: 'uGBs1aTCRFwJwWUx3TN_sZWtxM3Ga3xLPmvLS40wcOA',
       data: {},
     });
+    res.end('');
+  },
+  [EventType.SCAN]: ({ body }, req, res) => {
+    console.log('扫描带参数的二维码');
+    console.log(body);
     res.end('');
   },
 };
