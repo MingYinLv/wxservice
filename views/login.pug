@@ -10,7 +10,7 @@ html(lang="zh-cn")
         input(type="hidden", name="returnUrl", value={ returnUrl })
         br
         span openId:
-        span(class="openid") #{window.localStorage.getItem('openid')}
+        span(class="openid")
         script(src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js")
         script.
           function getUrlParam(name) {
@@ -19,4 +19,5 @@ html(lang="zh-cn")
             if (r != null) return unescape(r[2]);
             return null; //返回参数值
           }
+          $('.openid').html(window.localStorage.getItem('openid'));
 
