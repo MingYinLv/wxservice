@@ -43,7 +43,11 @@ const eventHandler = {
       sendTemplate({
         touser: body.fromusername,
         template_id: 'yRsrZ7JhukYcFVng9Hs7IA4Ybx2PTl0zq94oeL09tHI',
-        data,
+        data: {
+          name: {
+            value: data.name,
+          },
+        },
       });
     });
     res.end('');
