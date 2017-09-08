@@ -63,9 +63,10 @@ function generator(app) {
     },
     getWebAuth() {
       app.get('/getWebAuth/:code', (req, res) => {
-        getWebAccessToken(req.params.code).then(({ openid }) => {
+        getWebAccessToken(req.params.code).then((data) => {
+          console.log(data);
           res.json({
-            openid,
+            openid: data.openid,
           });
         });
       });
