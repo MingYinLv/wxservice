@@ -19,5 +19,15 @@ html(lang="zh-cn")
             if (r != null) return unescape(r[2]);
             return null; //返回参数值
           }
-          $('.openid').html(window.localStorage.getItem('openid'));
-
+          var openid = localStorage.getItem('openid');
+          if (!openid) {
+            $.ajax({
+              type: 'GET',
+              url: '/getWebAuth/' + getUrlParam('code'),
+              success: function (response) {
+                console.log(response);
+              }
+            });
+          } else {
+            $('.openid').html(openid);
+          }

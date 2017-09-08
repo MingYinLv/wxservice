@@ -49,7 +49,7 @@ function generator(app) {
     login() {
       app.get('/login/:returnUrl', (req, res) => {
         const { returnUrl } = req.params;
-        res.end(pug.compileFile('./views/login.pug')({ returnUrl }));
+        res.end(pug.compileFile('./views/login.pug')({ returnUrl, openid }));
       });
       app.post('/login', (req, res) => {
         const { openid, returnUrl } = req.body;
@@ -58,6 +58,15 @@ function generator(app) {
         }).then(({ result }) => {
           req.session.user = result;
           res.redirect(returnUrl);
+        });
+      });
+    },
+    getWebAuth() {
+      app.get('/getWebAuth/:code', (req, res) => {
+        getWebAccessToken(req.params.code).then(({ openid }) => {
+          res.json({
+            openid,
+          });
         });
       });
     },
