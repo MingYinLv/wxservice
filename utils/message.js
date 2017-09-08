@@ -39,6 +39,7 @@ const eventHandler = {
     console.log('扫描带参数的二维码');
     const { eventkey } = body;
     find(eventkey).then((data) => {
+      console.log(data);
       sendTemplate({
         touser: body.fromusername,
         template_id: 'yRsrZ7JhukYcFVng9Hs7IA4Ybx2PTl0zq94oeL09tHI',
