@@ -77,6 +77,7 @@ export function getWebAccessToken(code) {
 }
 
 export function getQrCode(action_info) {
+  console.log(action_info);
   return fetch('/cgi-bin/qrcode/create', {
     method: 'POST',
     body: {
