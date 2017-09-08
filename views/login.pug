@@ -18,7 +18,7 @@ html(lang="zh-cn")
           if (!openid) {
             $.ajax({
               type: 'GET',
-              url: '/getWebAuth/' + $('.code').value,
+              url: '/getWebAuth/' + $('.code').val(),
               success: function (response) {
                 console.log(response);
               }
