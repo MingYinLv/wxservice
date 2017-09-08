@@ -84,7 +84,6 @@ export function getQrCode(action_info) {
       action_info,
       expire_seconds: 3600,
       action_name: 'QR_STR_SCENE',
-      scene_str: 'id',
     },
   });
 }
