@@ -36,8 +36,8 @@ const eventHandler = {
     res.end('');
   },
   [EventType.SCAN]: ({ body }, req, res) => {
-    console.log('扫描带参数的二维码');
     const { eventkey } = body;
+    console.log('扫描带参数的二维码', eventkey);
     find(eventkey).then((data) => {
       console.log(data);
       sendTemplate({
