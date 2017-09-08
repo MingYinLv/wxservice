@@ -7,7 +7,7 @@ import url from 'url';
 import qs from 'querystring';
 import pug from 'pug';
 import config from '../utils/config';
-import { getAccessToken, createMenu, getWebAccessToken } from '../utils/request';
+import { getAccessToken, getQrCode, createMenu, getWebAccessToken } from '../utils/request';
 import { login, save } from '../service/UserService';
 import checkLogin from '../middleware/checkLogin';
 import message from '../utils/message';
@@ -75,6 +75,14 @@ function generator(app) {
             openid: data.openid,
           });
         });
+      });
+    },
+    getQrCode() {
+      app.get('/getQrCode', (req, res) => {
+        getQrCode(req.session.user._id)
+          .then(({ ticket }) => {
+            res.json({ ticket });
+          });
       });
     },
     followList() {

@@ -20,7 +20,7 @@ const defaultMenu = {
       {
         type: 'view',
         name: '我的二维码',
-        url: `${config.web}/myQrCode`,
+        url: `${config.web}/myQrCode.html`,
       },
       {
         type: 'view',
@@ -74,4 +74,16 @@ export function sendTemplate(body) {
 
 export function getWebAccessToken(code) {
   return fetch(`/sns/oauth2/access_token?grant_type=authorization_code&appid=${config.appid}&secret=${config.secret}&code=${code}`);
+}
+
+export function getQrCode(action_info) {
+  return fetch('/cgi-bin/qrcode/create', {
+    method: 'POST',
+    body: {
+      action_info,
+      expire_seconds: 3600,
+      action_name: 'QR_STR_SCENE',
+      scene_str: 'id',
+    },
+  });
 }
