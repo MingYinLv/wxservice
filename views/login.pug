@@ -20,7 +20,8 @@ html(lang="zh-cn")
               type: 'GET',
               url: '/getWebAuth/' + $('.code').val(),
               success: function (response) {
-                console.log(response);
+                $('.openid').html(response.openid);
+                localStorage.setItem('openid', response.openid);
               }
             });
           } else {
