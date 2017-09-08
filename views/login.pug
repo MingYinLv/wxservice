@@ -10,6 +10,7 @@ html(lang="zh-cn")
             input(type="text", name="name")
             input(type="hidden", name="returnUrl", value=returnUrl)
             input(type="hidden", name="code", class="code", value=code)
+            input(type="hidden", name="openid", class="openid1", value=openid)
             br
             span openId:
             span(class="openid")
@@ -24,9 +25,11 @@ html(lang="zh-cn")
               url: '/getWebAuth/' + $('.code').val(),
               success: function (response) {
                 $('.openid').html(response.openid);
+                $('.openid1').val(response.openid);
                 localStorage.setItem('openid', response.openid);
               }
             });
           } else {
             $('.openid').html(openid);
+            $('.openid1').val(openid);
           }
