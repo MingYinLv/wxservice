@@ -49,7 +49,7 @@ function generator(app) {
     login() {
       app.get('/login/:returnUrl', (req, res) => {
         const { returnUrl } = req.params;
-        res.end(pug.compileFile('./views/login.pug')({ returnUrl, openid }));
+        res.end(pug.compileFile('./views/login.pug')({ returnUrl }));
       });
       app.post('/login', (req, res) => {
         const { openid, returnUrl } = req.body;
