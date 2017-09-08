@@ -3,6 +3,7 @@
  */
 
 import { sendTemplate } from './request';
+import { find } from '../service/UserService';
 
 function convertXmlJson(body) {
   const xml = body.xml;
@@ -36,7 +37,14 @@ const eventHandler = {
   },
   [EventType.SCAN]: ({ body }, req, res) => {
     console.log('扫描带参数的二维码');
-    console.log(body);
+    const { eventkey } = body;
+    find(eventkey).then((data) => {
+      sendTemplate({
+        touser: body.fromusername,
+        template_id: 'yRsrZ7JhukYcFVng9Hs7IA4Ybx2PTl0zq94oeL09tHI',
+        data,
+      });
+    });
     res.end('');
   },
 };

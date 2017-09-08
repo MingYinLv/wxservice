@@ -2,6 +2,7 @@
  * Created by MingYin Lv on 2017/9/6 下午4:24.
  */
 
+import mongoose from 'mongoose';
 import { UserModel } from '../db';
 
 
@@ -16,6 +17,9 @@ export const login = ({ openid }) => {
   }).exec();
 };
 
+export const find = ({ userid }) => {
+  return UserModel.findOne({ _id: mongoose.Types.ObjectId(userid) }, '-__v').exec();
+};
 
 export const save = (user) => {
   // todo
