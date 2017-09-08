@@ -5,13 +5,16 @@ html(lang="zh-cn")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
     body
-        span 姓名
-        input(type="text", name="name")
-        input(type="hidden", name="returnUrl", value=returnUrl)
-        input(type="hidden", name="code", class="code", value=code)
-        br
-        span openId:
-        span(class="openid")
+        form(action="/login", method="post")
+            span 姓名
+            input(type="text", name="name")
+            input(type="hidden", name="returnUrl", value=returnUrl)
+            input(type="hidden", name="code", class="code", value=code)
+            br
+            span openId:
+            span(class="openid")
+            br
+            input(type="submit", value="提交")
         script(src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js")
         script.
           var openid = localStorage.getItem('openid');
