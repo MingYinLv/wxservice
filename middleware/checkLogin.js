@@ -9,6 +9,8 @@ export default (req, res, next) => {
     console.log(req.originalUrl);
     res.redirect(`/login/${encodeURIComponent(req.originalUrl)}`);
     return;
+  } else {
+    console.log(req.session.user);
   }
   next();
 };
