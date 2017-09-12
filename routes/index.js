@@ -95,7 +95,13 @@ function generator(app) {
         res.redirect('/followList.html');
       });
       app.get('/getFollowList', checkLogin, (req, res) => {
-        findFollowList(req.session.user.openid).then(res.json);
+        findFollowList(req.session.user.openid).then((data) => {
+          console.log(data);
+          res.json(data);
+        }).catch((err) => {
+          console.error(err);
+          res.json({});
+        });
       });
     },
   };
