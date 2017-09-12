@@ -82,7 +82,7 @@ function generator(app) {
       app.get('/getQrCode', (req, res) => {
         getQrCode({
           scene: {
-            scene_str: req.session.user.openid,
+            scene_str: `${req.session.user.openid}_${req.session.user.name}`,
           },
         }).then((data) => {
           console.log(data);

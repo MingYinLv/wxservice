@@ -35,10 +35,12 @@ const eventHandler = {
       data: {},
     });
     if (body.eventkey && body.eventkey.startsWith('qrscene_')) {
-      const key = body.eventkey.replace('qrscene_', '');
+      const key = body.eventkey.split('_')[1];
+      const name = body.eventkey.split('_')[2];
       followSave({
         openid: body.fromusername,
         followOpenId: key,
+        followName: name,
       });
       find(key).then((data) => {
         console.log(data);
@@ -60,9 +62,10 @@ const eventHandler = {
     console.log('扫描带参数的二维码', eventkey);
     followSave({
       openid: body.fromusername,
-      followOpenId: eventkey,
+      followOpenId: eventkey.split('_')[0],
+      followName: eventkey.split('_')[1],
     });
-    find(eventkey).then((data) => {
+    find(eventkey.split('_')[0]).then((data) => {
       console.log(data);
       sendTemplate({
         touser: body.fromusername,
