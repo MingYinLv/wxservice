@@ -22,6 +22,10 @@ export const find = ({ openid, followOpenId }) => {
     .exec();
 };
 
+export const findFollowList = (openid) => {
+  return FollowModel.find({ openid }).exec();
+};
+
 export const save = (follow) => {
   // todo
   return new Promise((resolve) => {

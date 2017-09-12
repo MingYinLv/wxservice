@@ -8,7 +8,8 @@ import qs from 'querystring';
 import pug from 'pug';
 import config from '../utils/config';
 import { getAccessToken, getQrCode, createMenu, getWebAccessToken } from '../utils/request';
-import { login, save } from '../service/UserService';
+import { save } from '../service/UserService';
+import { findFollowList } from '../service/FollowService';
 import checkLogin from '../middleware/checkLogin';
 import message from '../utils/message';
 
@@ -92,6 +93,9 @@ function generator(app) {
     followList() {
       app.get('/followList', checkLogin, (req, res) => {
         res.redirect('/followList.html');
+      });
+      app.get('/getFollowList', checkLogin, (req, res) => {
+        findFollowList(req.session.user.openid).then(res.json);
       });
     },
   };
