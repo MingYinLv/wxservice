@@ -37,8 +37,8 @@ const eventHandler = {
     if (body.eventkey && body.eventkey.startsWith('qrscene_')) {
       const key = body.eventkey.replace('qrscene_', '');
       followSave({
-        _id: req.session.user.openid,
-        followId: key,
+        openid: body.fromusername,
+        followOpenId: key,
       });
       find(key).then((data) => {
         console.log(data);
@@ -59,8 +59,8 @@ const eventHandler = {
     const { eventkey } = body;
     console.log('扫描带参数的二维码', eventkey);
     followSave({
-      _id: req.session.user.openid,
-      followId: eventkey,
+      openid: body.fromusername,
+      followOpenId: eventkey,
     });
     find(eventkey).then((data) => {
       console.log(data);

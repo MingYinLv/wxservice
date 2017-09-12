@@ -14,12 +14,11 @@ import { FollowModel } from '../db';
  * @param followId 关注的id
  * @returns {Promise}
  */
-export const find = ({ _id, followId }) => {
+export const find = ({ openid, followOpenId }) => {
   return FollowModel
     .findOne({
-      _id: mongoose.Types.ObjectId(_id),
-      followId: mongoose.Types.ObjectId(followId),
-    }, '-__v')
+      openid, followOpenId,
+    })
     .exec();
 };
 

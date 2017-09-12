@@ -17,8 +17,8 @@ export const login = ({ openid }) => {
   }).exec();
 };
 
-export const find = (userid) => {
-  return UserModel.findOne({ _id: mongoose.Types.ObjectId(userid) }, '-__v').exec();
+export const find = (openid) => {
+  return UserModel.findOne({ openid }).exec();
 };
 
 export const save = (user) => {

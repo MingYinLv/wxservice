@@ -5,6 +5,7 @@
 import { Schema } from 'mongoose';
 
 export default new Schema({
-  followId: String,
+  openid: String,
+  followOpenId: String,
 });
 
