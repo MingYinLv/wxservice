@@ -4,6 +4,7 @@
 
 import { sendTemplate } from './request';
 import { find } from '../service/UserService';
+import { save as followSave } from '../service/FollowService';
 
 function convertXmlJson(body) {
   const xml = body.xml;
@@ -33,11 +34,34 @@ const eventHandler = {
       template_id: 'uGBs1aTCRFwJwWUx3TN_sZWtxM3Ga3xLPmvLS40wcOA',
       data: {},
     });
+    if (body.eventkey && body.eventkey.startsWith('qrscene_')) {
+      const key = body.eventkey.replace('qrscene_', '');
+      followSave({
+        _id: req.session.user.openid,
+        followId: key,
+      });
+      find(key).then((data) => {
+        console.log(data);
+        sendTemplate({
+          touser: body.fromusername,
+          template_id: 'yRsrZ7JhukYcFVng9Hs7IA4Ybx2PTl0zq94oeL09tHI',
+          data: {
+            name: {
+              value: data.name,
+            },
+          },
+        });
+      });
+    }
     res.end('');
   },
   [EventType.SCAN]: ({ body }, req, res) => {
     const { eventkey } = body;
     console.log('扫描带参数的二维码', eventkey);
+    followSave({
+      _id: req.session.user.openid,
+      followId: eventkey,
+    });
     find(eventkey).then((data) => {
       console.log(data);
       sendTemplate({
